@@ -1,1 +1,10 @@
+body {
+	margin: 0 auto;
+	height: 50em;
+}
 
+.root {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
