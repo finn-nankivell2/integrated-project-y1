@@ -3,3 +3,39 @@
 	justify-content: left;
 	gap: 30px;
 }
+
+
+.header-buttons-flex {
+	display: flex;
+	justify-content: space-between;
+}
+
+
+.header-button-text {
+	font-family: 'Spline Sans Mono', monospace;
+	font-weight: 500;
+	font-size: 23px;
+}
+
+
+.header-button {
+	cursor: pointer;
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	width: 100%;
+	margin: 20px 0px;
+	padding: 10px 0px;
+
+	background-color: #ffffff;
+
+	border-right: 1px solid #000000;
+}
+
+
+.header-button:hover {
+	background-color: #000000;
+	color: #ffffff;
+}
