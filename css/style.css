@@ -1,10 +1,18 @@
 body {
 	margin: 0 auto;
 	height: 50em;
+	background-color: #ffffff;
 }
 
 .root {
 	display: flex;
+	flex-direction: column;
 	align-items: center;
 	justify-content: center;
+}
+
+.debug {
+	/* min-width: 5em; */
+	min-height: 5.5em;
+	background-color: blueviolet;
 }

@@ -1,0 +1,17 @@
+.frontpage-main-article {
+}
+
+.frontpage-main-article img {
+	width: 100%;
+	height: 495px;
+	background-color: blue;
+
+	object-fit: cover;
+}
+
+.frontpage-main-title {
+	font-size: 66px;
+	font-family: 'Merriweather', serif;
+	font-weight: 900;
+	line-height: 1.25;
+}
