@@ -3,7 +3,7 @@
 	grid-template-columns: repeat(12, 1fr);
 	grid-row: auto;
 	grid-column-gap: 30px;
-	width: 72em;
+	width: 82em;
 }
 
 .layout-grid-1 {
