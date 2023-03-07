@@ -1,17 +1,49 @@
-.frontpage-main-article {
-}
-
 .frontpage-main-article img {
+	aspect-ratio: 16 / 9;
+
 	width: 100%;
 	height: 495px;
-	background-color: blue;
 
 	object-fit: cover;
 }
 
 .frontpage-main-title {
-	font-size: 66px;
-	font-family: 'Merriweather', serif;
-	font-weight: 900;
-	line-height: 1.25;
+	margin-bottom: 5px;
+}
+
+.frontpage-main-text {
+	margin-top: 20px;
+
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+}
+
+.frontpage-side-flex {
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+}
+
+.frontpage-side-article {
+	border-top: 1px solid;
+	border-color: #cbcbcb;
+
+	display: flex;
+	justify-content: space-between;
+}
+
+.frontpage-side-article img {
+	object-fit: cover;
+	width: 35%;
+	aspect-ratio: 1 / 1;
+}
+
+.frontpage-side-article-text {
+	margin-top: 8px;
+	width: 60%;
+}
+
+.frontpage-side-article-title {
+	margin-top: 8px;
 }

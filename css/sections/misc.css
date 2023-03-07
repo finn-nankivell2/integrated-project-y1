@@ -1,0 +1,30 @@
+section {
+	background-color: #ffffff;
+}
+
+.section-margin-bottom {
+	margin-bottom: 80px;
+}
+
+.section-sep {
+	border-top: 2px solid;
+	border-color: #cbcbcb;
+	display: flex;
+
+	margin-bottom: 50px;
+}
+
+.section-sep-title {
+	border-right: 2px solid;
+	border-color: #cbcbcb;
+	padding-right: 10px;
+	margin-right: 10px;
+}
+
+.section-sep-text {
+	padding-top: 8px;
+}
+
+.section-sep-text:last-child {
+	color: #ca4a5a;
+}
