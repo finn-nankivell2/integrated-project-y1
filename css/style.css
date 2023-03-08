@@ -14,43 +14,56 @@ body {
 .debug {
 	/* min-width: 5em; */
 	min-height: 5.5em;
-	background-color: blueviolet;
+	background-color: #ff00ff;
 }
 
+#dark-theme-button-holder {
+	min-width: 100px;
+	height: 50px;
 
-.michael {
+	display: flex;
+	align-items: center;
+	justify-content: center;
 
+	margin: 20px 0px;
+	padding: 10px 0px;
 }
 
 #dark-theme-button {
-	width: 50px;
-	height: 50px;
-
+	width: 40px;
+	height: 40px;
 	border-radius: 25px;
+	background-color: #ffffff;
+	border: 3px solid;
+	border-color: #000000;
 
-	position: fixed;
+	position: relative;
 
-	top: 40px;
-	right: 70px;
-
-	background-color: rgb(0, 0, 0);
-
-	transition: transform 200ms ease-in-out;
-	transform: translate(150px, 0px);
+	transition: all 200ms ease-in-out;
 }
 
-
-#dark-theme-button:hover {
-	transform: translate(0px, 0px);
+#dark-theme-button .dark-theme-button-shading {
+	width: 27px;
+	height: 27px;
+	border-radius: 25px;
+	background-color: #ffffff;
+	border: 3px solid;
+	border-color: #000000;
 }
 
+#dark-theme-button .dark-theme-button-blocking {
+	width: 15px;
+	height: 15px;
+	position: absolute;
 
-#dark-theme-hover {
-	width: 200px;
-	height: 150px;
+	border-radius: 8px;
+	background-color: #ffffff;
 
-	position: fixed;
 	top: 0px;
-	right: 0px;
+	left: -1px;
+}
+
+#dark-theme-button-holder:active #dark-theme-button {
+	transform: scale(0.8);
 }
 
