@@ -46,4 +46,6 @@
 
 .frontpage-side-article-title {
 	margin-top: 8px;
+	text-transform: capitalize;
 }
+

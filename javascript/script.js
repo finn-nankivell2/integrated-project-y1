@@ -1,6 +1,8 @@
+// Functions for interracting with RGB colour
 const colorTools = {
 	PULL_STRENGTH: 20,
 
+	// Function to parse a colour from css
 	parseColor: function(input) {
 		let m = input.match(/^rgb\s*\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*\)$/i);
 		if(m) {
@@ -9,7 +11,8 @@ const colorTools = {
 		return input;
 	},
 
-	pullColour: function(rgb, anchor, strength) {
+	// Move all three rgb channels closer to the anchor, by the strength
+	pullColor: function(rgb, anchor, strength) {
 		const normalize = (n) => (n > 0) ? 1 : (n < 0) ? -1 : 0;
 
 		let pullRgb = [
@@ -21,17 +24,19 @@ const colorTools = {
 		return pullRgb;
 	},
 
+	// Check if an rgb colour can be considered greyscale
 	isGreyscale: function(rgb, greyscaleRange) {
 		return (Math.abs(rgb[0]-rgb[1]) <= greyscaleRange && Math.abs(rgb[1]-rgb[2]) <= greyscaleRange);
 	},
 
+	// Invert and pull and rgb colour
 	invertRgb: function(rgb) {
 		let initialC = this.parseColor(rgb);
 		if (!this.isGreyscale(initialC, 10)) {
 			return rgb;
 		}
 
-		initialC = this.pullColour(initialC, 127, this.PULL_STRENGTH);
+		initialC = this.pullColor(initialC, 127, this.PULL_STRENGTH);
 		let invertedC = [
 			255-initialC[0],
 			255-initialC[1],
@@ -43,6 +48,7 @@ const colorTools = {
 };
 
 
+// Object for managing the two themes
 const darkAndLightTheme = {
 	defaultThemeRules: [],
 	darkThemeRules: [],
@@ -50,6 +56,7 @@ const darkAndLightTheme = {
 	darkThemeActive: false,
 	currentlyTransitioning: false,
 
+	// Setup the themes when the script starts
 	setup: function(cssSheets) {
 		this.cssSheetsDynamic = cssSheets;
 
@@ -65,6 +72,7 @@ const darkAndLightTheme = {
 				continue;
 			}
 
+			// Create different themes based on the cssRules
 			for (let rule of sheet.cssRules) {
 				if (!rule.style) continue;
 
@@ -97,6 +105,7 @@ const darkAndLightTheme = {
 		}
 	},
 
+	// Apply all rules for a given theme
 	applyRules: function(theme) {
 		this.currentlyTransitioning = true;
 		for (let override of theme) {
@@ -109,14 +118,21 @@ const darkAndLightTheme = {
 		}, 201);
 	},
 
+	// Create an object that contains alternate css rules and updates the live ones
 	createRuleOverride: function(rule, properties) {
 		return {
-			rule: rule,
-			properties: properties,
+			rule: rule, // Reference to the cssRule object
+			properties: properties, // List of css properties to update
+
+			// Activate apply the changes to the csRule properties
 			activate: function() {
 				let rule = this.rule;
+
+				// For a smooth transition
 				let transitionStyle = rule.style.transition;
 				rule.style.transition = "all 200ms ease-in-out";
+
+				// Update all properties
 				for (let pair of this.properties) {
 					try {
 						switch (pair[0]) {
@@ -127,10 +143,12 @@ const darkAndLightTheme = {
 						}
 					}
 
+					// Catch any potential errors such as the css file being readonly
 					catch(e) {
 						console.log(e);
 					}
 				}
+				// Reset
 				setTimeout(function() {
 					rule.style.transition = transitionStyle;
 				}, 200);
@@ -146,6 +164,8 @@ const darkAndLightTheme = {
 	const button = document.getElementById("dark-theme-button-holder");
 	button.addEventListener("click", function(e) {
 		e.preventDefault();
+
+		// If currently switching between themes, do not switch again
 		if (darkAndLightTheme.currentlyTransitioning) {
 			return;
 		}

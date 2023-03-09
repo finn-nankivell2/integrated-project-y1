@@ -50,13 +50,6 @@ header {
 
 }
 
-
-/* .header-button:last-child { */
-/* 	border-right: 0px solid; */
-/* 	border-color: #000000; */
-/* } */
-
-
 .header-button:hover {
 	background-color: #000000;
 	color: #ffffff;
