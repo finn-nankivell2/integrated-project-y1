@@ -63,7 +63,7 @@ CREATE TABLE `authors` (
   `author_id` int(11) NOT NULL,
   `name` varchar(100) NOT NULL,
   `email` varchar(70) DEFAULT NULL,
-  `personal_website` varchar(200) NOT NULL,
+  `personal_website` varchar(200) DEFAULT NULL,
   `bio` varchar(300) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -159,3 +159,4 @@ COMMIT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+

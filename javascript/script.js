@@ -40,8 +40,9 @@ const colorTools = {
 		let invertedC = [
 			255-initialC[0],
 			255-initialC[1],
-			255-initialC[2],
+			255-initialC[2]
 		];
+		console.log(invertedC);
 
 		return `rgb(${invertedC[0]}, ${invertedC[1]}, ${invertedC[2]})`;
 	}
