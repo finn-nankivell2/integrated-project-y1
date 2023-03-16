@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Mar 09, 2023 at 01:56 PM
+-- Generation Time: Mar 16, 2023 at 01:54 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.0.25
 
@@ -28,7 +28,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `articles` (
-  `article_id` int(11) NOT NULL,
+  `id` int(11) NOT NULL,
   `author_id` int(11) NOT NULL,
   `title` varchar(250) NOT NULL,
   `sub_heading` varchar(250) NOT NULL,
@@ -40,6 +40,13 @@ CREATE TABLE `articles` (
   `location` varchar(50) NOT NULL,
   `summary` varchar(450) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `articles`
+--
+
+INSERT INTO `articles` (`id`, `author_id`, `title`, `sub_heading`, `short_headline`, `content`, `image`, `date`, `time`, `location`, `summary`) VALUES
+(1, 1, 'Test Article', 'BLARHGHHHGHG', 'BLARHGHHHGHG2', 'wAHHHHHHHHHH', 'hehehaha.png', '2023-03-09', '12:24:00', 'dublin', 'wah');
 
 -- --------------------------------------------------------
 
@@ -60,10 +67,10 @@ CREATE TABLE `articles_topics` (
 --
 
 CREATE TABLE `authors` (
-  `author_id` int(11) NOT NULL,
+  `id` int(11) NOT NULL,
   `name` varchar(100) NOT NULL,
   `email` varchar(70) DEFAULT NULL,
-  `personal_website` varchar(200) DEFAULT NULL,
+  `personal_website` varchar(200) NOT NULL,
   `bio` varchar(300) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -71,7 +78,7 @@ CREATE TABLE `authors` (
 -- Dumping data for table `authors`
 --
 
-INSERT INTO `authors` (`author_id`, `name`, `email`, `personal_website`, `bio`) VALUES
+INSERT INTO `authors` (`id`, `name`, `email`, `personal_website`, `bio`) VALUES
 (1, 'Michael Gregory', 'birthdayboy@gmail.com', 'https://jerma-lore.fandom.com/wiki/Michael', 'Michael is a birthday boy. He has loads of super cool toys!');
 
 -- --------------------------------------------------------
@@ -81,9 +88,17 @@ INSERT INTO `authors` (`author_id`, `name`, `email`, `personal_website`, `bio`) 
 --
 
 CREATE TABLE `topics` (
-  `topic_id` int(11) NOT NULL,
+  `id` int(11) NOT NULL,
   `name` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `topics`
+--
+
+INSERT INTO `topics` (`id`, `name`) VALUES
+(1, 'technology'),
+(2, 'review');
 
 --
 -- Indexes for dumped tables
@@ -93,7 +108,7 @@ CREATE TABLE `topics` (
 -- Indexes for table `articles`
 --
 ALTER TABLE `articles`
-  ADD PRIMARY KEY (`article_id`),
+  ADD PRIMARY KEY (`id`),
   ADD KEY `author_id` (`author_id`);
 
 --
@@ -108,13 +123,13 @@ ALTER TABLE `articles_topics`
 -- Indexes for table `authors`
 --
 ALTER TABLE `authors`
-  ADD PRIMARY KEY (`author_id`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `topics`
 --
 ALTER TABLE `topics`
-  ADD PRIMARY KEY (`topic_id`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -124,19 +139,19 @@ ALTER TABLE `topics`
 -- AUTO_INCREMENT for table `articles`
 --
 ALTER TABLE `articles`
-  MODIFY `article_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `authors`
 --
 ALTER TABLE `authors`
-  MODIFY `author_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `topics`
 --
 ALTER TABLE `topics`
-  MODIFY `topic_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Constraints for dumped tables
@@ -146,17 +161,16 @@ ALTER TABLE `topics`
 -- Constraints for table `articles`
 --
 ALTER TABLE `articles`
-  ADD CONSTRAINT `fk1` FOREIGN KEY (`author_id`) REFERENCES `authors` (`author_id`);
+  ADD CONSTRAINT `fk1` FOREIGN KEY (`author_id`) REFERENCES `authors` (`id`);
 
 --
 -- Constraints for table `articles_topics`
 --
 ALTER TABLE `articles_topics`
-  ADD CONSTRAINT `fk2` FOREIGN KEY (`topic_id`) REFERENCES `topics` (`topic_id`),
-  ADD CONSTRAINT `fk3` FOREIGN KEY (`article_id`) REFERENCES `articles` (`article_id`);
+  ADD CONSTRAINT `fk2` FOREIGN KEY (`topic_id`) REFERENCES `topics` (`id`),
+  ADD CONSTRAINT `fk3` FOREIGN KEY (`article_id`) REFERENCES `articles` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-
