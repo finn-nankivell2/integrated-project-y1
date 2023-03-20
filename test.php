@@ -12,9 +12,21 @@ try {
 	Article::link_database($db);
 	Topic::link_database($db);
 
-	foreach(Topic::find_all() as $author) {
-		echo $author->properties_as_html();
+	echo "<h1>Authors</h1>";
+	foreach(Author::find_all() as $t) {
+		echo $t->properties_as_html();
 	}
+
+	echo "<h1>Articles</h1>";
+	foreach(Article::find_all() as $t) {
+		echo $t->properties_as_html();
+	}
+
+	echo "<h1>Topics</h1>";
+	foreach(Topic::find_all() as $t) {
+		echo $t->properties_as_html();
+	}
+
 }
 
 catch(Exception $e) {

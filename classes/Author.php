@@ -9,7 +9,7 @@ class Author extends DatabaseType {
 	public $bio;
 
 	public function  __construct($data) {
-		$this->id = $data["id"];
+		$this->id = self::id_exists($data);
 		$this->name = $data["name"];
 		$this->name = $data["name"];
 		$this->email = $data["email"];
@@ -25,22 +25,14 @@ class Author extends DatabaseType {
 	}
 
 	public static function find_by_id($id) {
-		$conn = self::$db->conn();
-		$sql = "SELECT * FROM authors WHERE id = :id";
 		$params = [
 			":id" => $id
 		];
 
-		$stmt = $conn->prepare($sql);
-		$status = $stmt->execute($params);
-
-		$author = null;
-		$row = $stmt->fetch(PDO::FETCH_ASSOC);
-		if ($row !== false) {
-			$author = new Author($row);
-		}
-
-		return $author;
+		return array_map(
+			function($item) { return new Author($item); },
+			self::$db->sql_collect("SELECT * FROM authors WHERE id = :id", $params)
+		);
 	}
 }
 ?>

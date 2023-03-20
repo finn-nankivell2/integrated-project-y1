@@ -35,9 +35,9 @@ class DB {
 		return $this->conn;
 	}
 
-	public function sql_collect($sql) {
+	public function sql_collect($sql, $params = []) {
 		$stmt = $this->conn->prepare($sql);
-		$status = $stmt->execute();
+		$status = $stmt->execute($params);
 
 		$rows_array = [];
 		$row = $stmt->fetch(PDO::FETCH_ASSOC);

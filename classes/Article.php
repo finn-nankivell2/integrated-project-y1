@@ -15,7 +15,7 @@ class Article extends DatabaseType {
 	public $summary;
 
 	public function  __construct($data) {
-		$this->id = $data["id"];
+		$this->id = self::id_exists($data);
 		$this->author_id = $data["author_id"];
 		$this->title = $data["title"];
 		$this->sub_heading = $data["sub_heading"];
@@ -36,22 +36,14 @@ class Article extends DatabaseType {
 	}
 
 	public static function find_by_id($id) {
-		$conn = self::$db->conn();
-		$sql = "SELECT * FROM articles WHERE id = :id";
 		$params = [
 			":id" => $id
 		];
 
-		$stmt = $conn->prepare($sql);
-		$status = $stmt->execute($params);
-
-		$story = null;
-		$row = $stmt->fetch(PDO::FETCH_ASSOC);
-		if ($row !== false) {
-			$story = new Article($row);
-		}
-
-		return $story;
+		return array_map(
+			function($item) { return new Article($item); },
+			self::$db->sql_collect("SELECT * FROM articles WHERE id = :id", $params)
+		);
 	}
 }
 ?>

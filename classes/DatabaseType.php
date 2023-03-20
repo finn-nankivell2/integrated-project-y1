@@ -6,6 +6,10 @@ class DatabaseType {
 		self::$db = $db_ref;
 	}
 
+	protected static function id_exists($data) {
+		return array_key_exists("id", $data) ? $data["id"] : null;
+	}
+
 	public function properties_as_html() {
 		$str = "<div style='border: 1px solid #000000'>";
 		$str .= "<h2>" . get_class($this) . "</h2>";
@@ -20,22 +24,6 @@ class DatabaseType {
 		}
 		$str .= "</div>";
 		return $str;
-	}
-
-	protected static function find_all_from($db, $column, $callback) {
-		$sql = "SELECT * FROM $column";
-		$stmt = self::$db->conn()->prepare($sql);
-		$status = $stmt->execute();
-
-		$rows_array = [];
-		$row = $stmt->fetch(PDO::FETCH_ASSOC);
-		while ($row !== false) {
-			$rows_array[] = $callback($row);
-			$row = $stmt->fetch(PDO::FETCH_ASSOC);
-		}
-
-		return $rows_array;
-
 	}
 }
 
