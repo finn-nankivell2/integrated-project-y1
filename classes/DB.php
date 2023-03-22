@@ -35,6 +35,17 @@ class DB {
 		return $this->conn;
 	}
 
+	public function sql_execute($sql, $params = []) {
+		$stmt = $this->conn->prepare($sql);
+		$status = $stmt->execute($params);
+
+		if (!$status) {
+			$err = $stmt->errorInfo();
+			$message = "code: " . $err[0] . ", message: " . $err[2];
+			throw new Exception($message);
+		}
+	}
+
 	public function sql_collect($sql, $params = []) {
 		$stmt = $this->conn->prepare($sql);
 		$status = $stmt->execute($params);

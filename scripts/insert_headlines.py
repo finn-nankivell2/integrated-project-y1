@@ -60,6 +60,16 @@ def main():
 
 	print("\n".join(headlines))
 
+	import requests
+	r = requests.post("http://localhost/post_sql.php", data={
+		"dbname" : "news",
+		"sql" : sql_to_execute
+	})
+
+	print(r.text)
+	if "Ok" in r.text:
+		print("Success")
+	
 
 if __name__ == "__main__":
 	main()
