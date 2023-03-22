@@ -35,23 +35,20 @@ def insert_headline_sql(headlines_list):
 SQL_FILE_PATH = "../database/news.sql"
 SQL_OUTPUT_PATH = "../database/news_append.sql"
 
-HEADLINE_LENGTH = 65
+HEADLINE_LENGTH = 55
 
 
 def main():
 	news_sites = [
-		HeadlineScrape("https://theguardian.com", "js-headline-text"),
+		# HeadlineScrape("https://theguardian.com", "js-headline-text"),
 		HeadlineScrape("https://kotaku.com", "sc-1qoge05-0"),
-		HeadlineScrape("https://wired.com", "SummaryItemHedBase-eaxFWE")
+		HeadlineScrape("https://wired.com", "SummaryItemHedBase-eaxFWE"),
+		HeadlineScrape("https://gameinformer.com", "page-link"),
 	]
 
 	headlines = []
 	for site in news_sites:
 		headlines.extend([h for h in site.get_all_headlines() if len(h) < HEADLINE_LENGTH])
-
-	# FILE = open(SQL_FILE_PATH, "r")
-	# sql_text = FILE.read()
-	# FILE.close()
 
 	sql_new_FILE = open(SQL_OUTPUT_PATH, "w+")
 
@@ -60,6 +57,8 @@ def main():
 
 	sql_new_FILE.write(sql_to_execute)
 	sql_new_FILE.close()
+
+	print("\n".join(headlines))
 
 
 if __name__ == "__main__":

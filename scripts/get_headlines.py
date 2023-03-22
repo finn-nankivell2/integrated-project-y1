@@ -20,7 +20,7 @@ class HeadlineScrape():
 		for h in headlines:
 			txt = h.string
 			if txt not in headlines_real and txt:
-				headlines_real.append(txt)
+				headlines_real.append(str(txt).lstrip().strip().replace("\n", ""))
 
 		return headlines_real
 
@@ -29,8 +29,9 @@ def main():
 	guardian = HeadlineScrape("https://theguardian.com", "js-headline-text")
 	kotaku = HeadlineScrape("https://kotaku.com", "sc-1qoge05-0")
 	wired = HeadlineScrape("https://wired.com", "SummaryItemHedBase-eaxFWE")
+	gameinformer = HeadlineScrape("https://gameinformer.com", "page-link")
 
-	headlines = wired.get_all_headlines()
+	headlines = gameinformer.get_all_headlines()
 	[print(f) for f in headlines]
 
 
