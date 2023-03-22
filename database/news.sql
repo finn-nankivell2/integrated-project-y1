@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Mar 16, 2023 at 01:54 PM
+-- Generation Time: Mar 22, 2023 at 04:02 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.0.25
 
@@ -46,7 +46,8 @@ CREATE TABLE `articles` (
 --
 
 INSERT INTO `articles` (`id`, `author_id`, `title`, `sub_heading`, `short_headline`, `content`, `image`, `date`, `time`, `location`, `summary`) VALUES
-(1, 1, 'Test Article', 'BLARHGHHHGHG', 'BLARHGHHHGHG2', 'wAHHHHHHHHHH', 'hehehaha.png', '2023-03-09', '12:24:00', 'dublin', 'wah');
+(1, 1, 'Test Article', 'TOPIC HERE', 'Test', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 'images/placeholder/fractal6.jpg', '2023-03-09', '12:24:00', 'dublin', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'),
+(2, 1, 'Life as a 21st-Century Trucker', 'LONG READ', 'Life', 'Lorem ipsum dolor sit amet.', 'images/placeholder/fractal1.jpg', '2023-03-09', '00:23:16', 'dublin', 'trucks');
 
 -- --------------------------------------------------------
 
@@ -139,7 +140,7 @@ ALTER TABLE `topics`
 -- AUTO_INCREMENT for table `articles`
 --
 ALTER TABLE `articles`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `authors`
@@ -174,3 +175,4 @@ COMMIT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
