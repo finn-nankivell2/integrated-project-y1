@@ -11,7 +11,6 @@ class Author extends DatabaseType {
 	public function  __construct($data) {
 		$this->id = self::id_exists($data);
 		$this->name = $data["name"];
-		$this->name = $data["name"];
 		$this->email = $data["email"];
 		$this->personal_website = $data["personal_website"];
 		$this->bio = $data["bio"];

@@ -36,13 +36,9 @@ class Article extends DatabaseType {
 	}
 
 	public static function find_by_id($id) {
-		$params = [
-			":id" => $id
-		];
-
 		return array_map(
 			function($item) { return new Article($item); },
-			self::$db->sql_collect("SELECT * FROM articles WHERE id = :id", $params)
+			self::$db->sql_collect("SELECT * FROM articles WHERE id = :id", [":id" => $id])
 		);
 	}
 }

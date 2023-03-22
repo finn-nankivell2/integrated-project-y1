@@ -32,6 +32,10 @@
 		Article::link_database($db);
 		Author::link_database($db);
 		Topic::link_database($db);
+
+		$all_articles = Article::find_all();
+		$main_article = $all_articles[0];
+		$main_article_author = Author::find_by_id($main_article->author_id)[0];
 	?>
 
 	<body>
@@ -54,65 +58,75 @@
 					</div>
 				</div>
 			</header>
+
 			<div id="header-padding"></div>
 			<section id="frontpage-section" class="section-margin-bottom">
 				<div class="layout-grid">
 					<div class="layout-grid-8 frontpage-main-article">
-						<img src="images/placeholder/fractal6.jpg" class="frontpage-main-image">
-						<div class="frontpage-main-text">
-							<?php
-							$article = Article::find_by_id(1)[0];
-							$author = Author::find_by_id($article->author_id)[0];
-
-							echo "<h4 class='article-topic'>$article->sub_heading</h4>";
-							echo "<h1 class='frontpage-main-title'>$article->title</h1>";
-							echo "<h4 class='article-author'>$author->name</h4>";
-							echo "<p class='frontpage-main-summary'>$article->summary</p>";
-							?>
-						</div>
+						<?php
+						echo "<img src='{$main_article->image}' class='frontpage-main-image'>";
+						echo "<div class='frontpage-main-text'>";
+							echo "<h4 class='article-topic'>$main_article->sub_heading</h4>";
+							echo "<h1 class='frontpage-main-title'>$main_article->title</h1>";
+							echo "<h4 class='article-author'>$main_article_author->name</h4>";
+							echo "<p class='frontpage-main-summary'>$main_article->summary</p>";
+						echo '</div>';
+						?>
 					</div>
 
 					<div class="layout-grid-4">
 						<div class="frontpage-side-flex">
-							<div class="frontpage-side-article">
-								<div class="frontpage-side-article-text">
-									<h4 class="article-topic">technology</h4>
-									<h3 class="frontpage-side-article-title">How To Unlock Your iPhone with a security key</h3>
-								</div>
-								<img src="images/placeholder/fractal2.jpg" alt="">
-							</div>
+							<?php
+							foreach(Article::find_all() as $a) {
+								echo "<div class='frontpage-side-article'>";
+									echo "<div class='frontpage-side-article-text'>";
+										echo "<h4 class='article-topic'>$a->sub_heading</h4>";
+										echo "<h3 class='frontpage-side-article-title''>$a->title</h3>";
+									echo "</div>";
+									echo "<img src='$a->image' alt=''>";
+								echo "</div>";
+							}
+							?>
 
-							<div class="frontpage-side-article">
-								<div class="frontpage-side-article-text">
-									<h4 class="article-topic">economy</h4>
-									<h3 class="frontpage-side-article-title">Heat Pumps Sell Like Hotcakes</h3>
-								</div>
-								<img src="images/placeholder/fractal3.jpg" alt="">
-							</div>
+							<!-- <div class="frontpage-side-article"> -->
+							<!-- 	<div class="frontpage-side-article-text"> -->
+							<!-- 		<h4 class="article-topic">technology</h4> -->
+							<!-- 		<h3 class="frontpage-side-article-title">How To Unlock Your iPhone with a security key</h3> -->
+							<!-- 	</div> -->
+							<!-- 	<img src="images/placeholder/fractal2.jpg" alt=""> -->
+							<!-- </div> -->
 
-							<div class="frontpage-side-article">
-								<div class="frontpage-side-article-text">
-									<h4 class="article-topic">politics</h4>
-									<h3 class="frontpage-side-article-title">Conspiracy Theorists Are Coming for the 15-Minute City</h3>
-								</div>
-								<img src="images/placeholder/fractal4.jpg" alt="">
-							</div>
+							<!-- <div class="frontpage-side-article"> -->
+							<!-- 	<div class="frontpage-side-article-text"> -->
+							<!-- 		<h4 class="article-topic">economy</h4> -->
+							<!-- 		<h3 class="frontpage-side-article-title">Heat Pumps Sell Like Hotcakes</h3> -->
+							<!-- 	</div> -->
+							<!-- 	<img src="images/placeholder/fractal3.jpg" alt=""> -->
+							<!-- </div> -->
 
-							<div class="frontpage-side-article">
-								<div class="frontpage-side-article-text">
-									<h4 class="article-topic">review</h4>
-									<h3 class="frontpage-side-article-title">Give Your Back a Break With Our Favorite Office Chairs</h3>
-								</div>
-								<img src="images/placeholder/fractal5.jpg" alt="">
-							</div>
+							<!-- <div class="frontpage-side-article"> -->
+							<!-- 	<div class="frontpage-side-article-text"> -->
+							<!-- 		<h4 class="article-topic">politics</h4> -->
+							<!-- 		<h3 class="frontpage-side-article-title">Conspiracy Theorists Are Coming for the 15-Minute City</h3> -->
+							<!-- 	</div> -->
+							<!-- 	<img src="images/placeholder/fractal4.jpg" alt=""> -->
+							<!-- </div> -->
 
-							<div class="frontpage-side-article">
-								<div class="frontpage-side-article-text">
-									<h4 class="article-topic">environment</h4>
-									<h3 class="frontpage-side-article-title">Microplastics Are Polluting The Oceans At A Dangerous Rate</h3>
-								</div>
-								<img src="images/placeholder/fractal8.jpg" alt="">
-							</div>
+							<!-- <div class="frontpage-side-article"> -->
+							<!-- 	<div class="frontpage-side-article-text"> -->
+							<!-- 		<h4 class="article-topic">review</h4> -->
+							<!-- 		<h3 class="frontpage-side-article-title">Give Your Back a Break With Our Favorite Office Chairs</h3> -->
+							<!-- 	</div> -->
+							<!-- 	<img src="images/placeholder/fractal5.jpg" alt=""> -->
+							<!-- </div> -->
+
+							<!-- <div class="frontpage-side-article"> -->
+							<!-- 	<div class="frontpage-side-article-text"> -->
+							<!-- 		<h4 class="article-topic">environment</h4> -->
+							<!-- 		<h3 class="frontpage-side-article-title">Microplastics Are Polluting The Oceans At A Dangerous Rate</h3> -->
+							<!-- 	</div> -->
+							<!-- 	<img src="images/placeholder/fractal8.jpg" alt=""> -->
+							<!-- </div> -->
 
 
 						</div>
