@@ -36,6 +36,22 @@
 		$all_articles = Article::find_all();
 		$main_article = $all_articles[0];
 		$main_article_author = Author::find_by_id($main_article->author_id)[0];
+
+		$side_stories = [
+			0 => $all_articles[1],
+			1 => $all_articles[2],
+			2 => $all_articles[3],
+			3 => $all_articles[4],
+			4 => $all_articles[5]			
+		];
+
+		$main_stories = [
+			0 => $all_articles[6],
+			1 => $all_articles[7],
+			2 => $all_articles[8],
+			// 3 => $all_articles[9],
+			// 4 => $all_articles[10]			
+		];
 	?>
 
 	<body>
@@ -77,58 +93,17 @@
 					<div class="layout-grid-4">
 						<div class="frontpage-side-flex">
 							<?php
-							foreach(Article::find_all() as $a) {
-								echo "<div class='frontpage-side-article'>";
-									echo "<div class='frontpage-side-article-text'>";
-										echo "<h4 class='article-topic'>$a->sub_heading</h4>";
-										echo "<h3 class='frontpage-side-article-title''>$a->title</h3>";
-									echo "</div>";
-									echo "<img src='$a->image' alt=''>";
-								echo "</div>";
+							foreach($side_stories as $a) {
+								echo 
+								'<div class="frontpage-side-article">
+									<div class="frontpage-side-article-text">
+										<h4 class="article-topic">' . $a->sub_heading . '</h4>
+										<h3 class="frontpage-side-article-title">' . $a->title . '</h3>
+									</div>
+									<img src="' . $a->image . '" alt="">
+								</div>';
 							}
 							?>
-
-							<!-- <div class="frontpage-side-article"> -->
-							<!-- 	<div class="frontpage-side-article-text"> -->
-							<!-- 		<h4 class="article-topic">technology</h4> -->
-							<!-- 		<h3 class="frontpage-side-article-title">How To Unlock Your iPhone with a security key</h3> -->
-							<!-- 	</div> -->
-							<!-- 	<img src="images/placeholder/fractal2.jpg" alt=""> -->
-							<!-- </div> -->
-
-							<!-- <div class="frontpage-side-article"> -->
-							<!-- 	<div class="frontpage-side-article-text"> -->
-							<!-- 		<h4 class="article-topic">economy</h4> -->
-							<!-- 		<h3 class="frontpage-side-article-title">Heat Pumps Sell Like Hotcakes</h3> -->
-							<!-- 	</div> -->
-							<!-- 	<img src="images/placeholder/fractal3.jpg" alt=""> -->
-							<!-- </div> -->
-
-							<!-- <div class="frontpage-side-article"> -->
-							<!-- 	<div class="frontpage-side-article-text"> -->
-							<!-- 		<h4 class="article-topic">politics</h4> -->
-							<!-- 		<h3 class="frontpage-side-article-title">Conspiracy Theorists Are Coming for the 15-Minute City</h3> -->
-							<!-- 	</div> -->
-							<!-- 	<img src="images/placeholder/fractal4.jpg" alt=""> -->
-							<!-- </div> -->
-
-							<!-- <div class="frontpage-side-article"> -->
-							<!-- 	<div class="frontpage-side-article-text"> -->
-							<!-- 		<h4 class="article-topic">review</h4> -->
-							<!-- 		<h3 class="frontpage-side-article-title">Give Your Back a Break With Our Favorite Office Chairs</h3> -->
-							<!-- 	</div> -->
-							<!-- 	<img src="images/placeholder/fractal5.jpg" alt=""> -->
-							<!-- </div> -->
-
-							<!-- <div class="frontpage-side-article"> -->
-							<!-- 	<div class="frontpage-side-article-text"> -->
-							<!-- 		<h4 class="article-topic">environment</h4> -->
-							<!-- 		<h3 class="frontpage-side-article-title">Microplastics Are Polluting The Oceans At A Dangerous Rate</h3> -->
-							<!-- 	</div> -->
-							<!-- 	<img src="images/placeholder/fractal8.jpg" alt=""> -->
-							<!-- </div> -->
-
-
 						</div>
 					</div>
 				</div>
@@ -141,36 +116,19 @@
 				</div>
 
 				<div class="layout-grid articles-group-horizontal">
-					<div class="layout-grid-4 article">
-						<img src="images/placeholder/fractal6.jpg" class="article-image">
-						<div class="article-text">
-							<h4 class="article-topic">technology and politics</h4>
-							<h1 class="article-title">The Spaceport at the Edge of the World</h1>
-							<h4 class="article-author">martin martinaise</h4>
-							<p class="article-summary">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex eos voluptatum ducimus modi culpa, nesciunt atque ullam adipisci nam! Ullam consequatur odit nam voluptas veniam qui culpa omnis ipsa illo.</p>
-						</div>
-					</div>
-
-					<div class="layout-grid-4 article">
-						<img src="images/placeholder/fractal5.jpg" class="article-image">
-						<div class="article-text">
-							<h4 class="article-topic">long read</h4>
-							<h1 class="article-title">Life as a 21st-Century Trucker</h1>
-							<h4 class="article-author">laura ipsum</h4>
-							<p class="article-summary">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex eos voluptatum ducimus modi culpa, nesciunt atque ullam adipisci nam! Ullam consequatur odit nam voluptas veniam qui culpa omnis ipsa illo.</p>
-						</div>
-					</div>
-
-					<div class="layout-grid-4 article">
-						<img src="images/placeholder/fractal4.jpg" class="article-image">
-						<div class="article-text">
-							<h4 class="article-topic">video games</h4>
-							<h1 class="article-title">How Video Gaming Is Really Cool Actually</h1>
-							<h4 class="article-author">video kojima</h4>
-							<p class="article-summary">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex eos voluptatum ducimus modi culpa, nesciunt atque ullam adipisci nam! Ullam consequatur odit nam voluptas veniam qui culpa omnis ipsa illo.</p>
-						</div>
-					</div>
-
+					<?php
+					foreach ($main_stories as $story) {
+						echo '<div class="layout-grid-4 article">
+							<img src="images/placeholder/fractal6.jpg" class="article-image">
+							<div class="article-text">
+								<h4 class="article-topic">' . $story->sub_heading . '</h4>
+								<h1 class="article-title">' . $story->title . '</h1>
+								<h4 class="article-author">' . Author::find_by_id($story->author_id)[0]->name. '</h4>
+								<p class="article-summary">' . $story->summary . '</p>
+							</div>
+						</div>';						
+					}
+					?>
 				</div>
 
 				<div class="layout-grid articles-group-horizontal">
