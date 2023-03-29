@@ -60,6 +60,16 @@ class DB {
 		return $rows_array;
 	}
 
+	public function sql_single($sql, $params = []) {
+		$stmt = $this->conn->prepare($sql);
+		$status = $stmt->execute($params);
+
+		$row = $stmt->fetch(PDO::FETCH_ASSOC);
+		$result = ($row !== false) ? $row : null;
+
+		return $result;
+	}
+
 	public function is_open() {
 		return $this->conn !== null;
 	}

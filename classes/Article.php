@@ -1,5 +1,5 @@
 <?php
-require_once "./classes/DatabaseType.php";
+require_once dirname(__FILE__)."/DatabaseType.php";
 
 class Article extends DatabaseType {
 	public $id;
@@ -36,9 +36,15 @@ class Article extends DatabaseType {
 	}
 
 	public static function find_by_id($id) {
+		$r = self::$db->sql_single("SELECT * FROM articles WHERE id = :id", [":id" => $id]);
+		$r = ($r !== null) ? new Article($r) : null;
+		return $r;
+	}
+
+	public static function find_order_by_date() {
 		return array_map(
 			function($item) { return new Article($item); },
-			self::$db->sql_collect("SELECT * FROM articles WHERE id = :id", [":id" => $id])
+			self::$db->sql_collect("SELECT * FROM articles ORDER BY date")
 		);
 	}
 }

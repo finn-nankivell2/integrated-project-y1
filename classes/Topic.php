@@ -1,5 +1,5 @@
 <?php
-require_once "./classes/DatabaseType.php";
+require_once dirname(__FILE__)."/DatabaseType.php";
 
 class Topic extends DatabaseType {
 	public $id;

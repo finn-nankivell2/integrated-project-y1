@@ -26,6 +26,5 @@ class DatabaseType {
 		return $str;
 	}
 }
-
 ?>
 

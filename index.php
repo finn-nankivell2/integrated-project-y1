@@ -33,25 +33,14 @@
 		Author::link_database($db);
 		Topic::link_database($db);
 
-		$all_articles = Article::find_all();
-		$main_article = $all_articles[0];
-		$main_article_author = Author::find_by_id($main_article->author_id)[0];
+		$article_drain = new Drain(Article::find_order_by_date());
+		$main_article = $article_drain->siphon(1);
+		$main_article_author = Author::find_by_id($main_article->author_id);
 
-		$side_stories = [
-			0 => $all_articles[1],
-			1 => $all_articles[2],
-			2 => $all_articles[3],
-			3 => $all_articles[4],
-			4 => $all_articles[5]			
-		];
+		$side_stories = $article_drain->siphon(5);
 
-		$main_stories = [
-			0 => $all_articles[6],
-			1 => $all_articles[7],
-			2 => $all_articles[8],
-			// 3 => $all_articles[9],
-			// 4 => $all_articles[10]			
-		];
+		$main_stories = $article_drain->siphon(3);
+		$main_stories2 = $article_drain->siphon(3);
 	?>
 
 	<body>
@@ -119,11 +108,11 @@
 					<?php
 					foreach ($main_stories as $story) {
 						echo '<div class="layout-grid-4 article">
-							<img src="images/placeholder/fractal6.jpg" class="article-image">
+							<img src="' . $story->image . '" class="article-image">
 							<div class="article-text">
 								<h4 class="article-topic">' . $story->sub_heading . '</h4>
 								<h1 class="article-title">' . $story->title . '</h1>
-								<h4 class="article-author">' . Author::find_by_id($story->author_id)[0]->name. '</h4>
+								<h4 class="article-author">' . Author::find_by_id($story->author_id)->name. '</h4>
 								<p class="article-summary">' . $story->summary . '</p>
 							</div>
 						</div>';						
@@ -132,6 +121,22 @@
 				</div>
 
 				<div class="layout-grid articles-group-horizontal">
+					<?php
+					foreach ($main_stories2 as $story) {
+						echo '<div class="layout-grid-4 article">
+							<img src="' . $story->image . '" class="article-image">
+							<div class="article-text">
+								<h4 class="article-topic">' . $story->sub_heading . '</h4>
+								<h1 class="article-title">' . $story->title . '</h1>
+								<h4 class="article-author">' . Author::find_by_id($story->author_id)->name. '</h4>
+								<p class="article-summary">' . $story->summary . '</p>
+							</div>
+						</div>';						
+					}
+					?>
+				</div>
+
+				<!-- <div class="layout-grid articles-group-horizontal">
 					<div class="layout-grid-4 article">
 						<img src="images/placeholder/fractal10.jpg" class="article-image">
 						<div class="article-text">
@@ -161,7 +166,7 @@
 							<p class="article-summary">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex eos voluptatum ducimus modi culpa, nesciunt atque ullam adipisci nam! Ullam consequatur odit nam voluptas veniam qui culpa omnis ipsa illo.</p>
 						</div>
 					</div>
-				</div>
+				</div> -->
 			</section>
 		</div>
 	</body>

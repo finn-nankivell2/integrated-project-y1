@@ -1,5 +1,5 @@
 <?php
-require_once "./classes/DatabaseType.php";
+require_once dirname(__FILE__)."/DatabaseType.php";
 
 class Author extends DatabaseType {
 	public $id;
@@ -24,14 +24,9 @@ class Author extends DatabaseType {
 	}
 
 	public static function find_by_id($id) {
-		$params = [
-			":id" => $id
-		];
-
-		return array_map(
-			function($item) { return new Author($item); },
-			self::$db->sql_collect("SELECT * FROM authors WHERE id = :id", $params)
-		);
+		$r = self::$db->sql_single("SELECT * FROM authors WHERE id = :id", [":id" => $id]);
+		$r = ($r !== null) ? new Author($r) : null;
+		return $r;
 	}
 }
 ?>

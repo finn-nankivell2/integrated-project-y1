@@ -15,6 +15,22 @@ def random_topic():
 	return random.choice(TOPICS)
 
 
+def random_image():
+	IMAGES = [
+		"images/placeholder/fractal1.jpg",
+		"images/placeholder/fractal2.jpg",
+		"images/placeholder/fractal3.jpg",
+		"images/placeholder/fractal4.jpg",
+		"images/placeholder/fractal5.jpg",
+		"images/placeholder/fractal6.jpg",
+		"images/placeholder/fractal7.jpg",
+		"images/placeholder/fractal8.jpg",
+		"images/placeholder/fractal9.jpg",
+		"images/placeholder/fractal10.jpg"
+	]
+	return random.choice(IMAGES)
+
+
 def lorem(length=None):
 	LOREM = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
 	return LOREM if length is None else LOREM[:length]
@@ -25,7 +41,7 @@ def insert_headline_sql(headlines_list):
 
 	for headline in headlines_list:
 		headline = headline.replace("'", "")
-		sql += f"(1, '{headline}', '{random_topic()}', 'Test', '{lorem()}', 'images/placeholder/fractal6.jpg', '0000-00-00', '00:00:00', 'dublin', '{lorem(255)}'),\n"
+		sql += f"(1, '{headline}', '{random_topic()}', 'Test', '{lorem()}', '{random_image()}', '0000-00-00', '00:00:00', 'dublin', '{lorem(255)}'),\n"
 
 	sql = sql[:-2]
 	sql += ";"
@@ -41,9 +57,9 @@ HEADLINE_LENGTH = 55
 def main():
 	news_sites = [
 		# HeadlineScrape("https://theguardian.com", "js-headline-text"),
-		HeadlineScrape("https://kotaku.com", "sc-1qoge05-0"),
-		HeadlineScrape("https://wired.com", "SummaryItemHedBase-eaxFWE"),
 		HeadlineScrape("https://gameinformer.com", "page-link"),
+		HeadlineScrape("https://wired.com", "SummaryItemHedBase-eaxFWE"),
+		HeadlineScrape("https://kotaku.com", "sc-1qoge05-0"),
 	]
 
 	headlines = []
@@ -69,7 +85,7 @@ def main():
 	print(r.text)
 	if "Ok" in r.text:
 		print("Success")
-	
+
 
 if __name__ == "__main__":
 	main()
