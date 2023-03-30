@@ -18,14 +18,9 @@ class Topic extends DatabaseType {
 	}
 
 	public static function find_by_id($id) {
-		$params = [
-			":id" => $id
-		];
-
-		return array_map(
-			function($item) { return new Topic($item); },
-			self::$db->sql_collect("SELECT * FROM topics WHERE id = :id", $params)
-		);
+		$r = self::$db->sql_single("SELECT * FROM topics WHERE id = :id", [":id" => $id]);
+		$r = ($r !== null) ? new Topic($r) : null;
+		return $r;
 	}
 }
 ?>

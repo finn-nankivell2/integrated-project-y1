@@ -36,11 +36,6 @@
 		$article_drain = new Drain(Article::find_order_by_date());
 		$main_article = $article_drain->siphon(1);
 		$main_article_author = Author::find_by_id($main_article->author_id);
-
-		$side_stories = $article_drain->siphon(5);
-
-		$main_stories = $article_drain->siphon(3);
-		$main_stories2 = $article_drain->siphon(3);
 	?>
 
 	<body>
@@ -82,7 +77,7 @@
 					<div class="layout-grid-4">
 						<div class="frontpage-side-flex">
 							<?php
-							foreach($side_stories as $a) {
+							foreach($article_drain->siphon(5) as $a) {
 								echo 
 								'<div class="frontpage-side-article">
 									<div class="frontpage-side-article-text">
@@ -106,7 +101,7 @@
 
 				<div class="layout-grid articles-group-horizontal">
 					<?php
-					foreach ($main_stories as $story) {
+					foreach ($article_drain->siphon(3) as $story) {
 						echo '<div class="layout-grid-4 article">
 							<img src="' . $story->image . '" class="article-image">
 							<div class="article-text">
@@ -122,7 +117,7 @@
 
 				<div class="layout-grid articles-group-horizontal">
 					<?php
-					foreach ($main_stories2 as $story) {
+					foreach ($article_drain->siphon(3) as $story) {
 						echo '<div class="layout-grid-4 article">
 							<img src="' . $story->image . '" class="article-image">
 							<div class="article-text">
@@ -135,38 +130,6 @@
 					}
 					?>
 				</div>
-
-				<!-- <div class="layout-grid articles-group-horizontal">
-					<div class="layout-grid-4 article">
-						<img src="images/placeholder/fractal10.jpg" class="article-image">
-						<div class="article-text">
-							<h4 class="article-topic">environment</h4>
-							<h1 class="article-title">The Mining Industry's Next Frontier Is Deep, Deep Under the Sea</h1>
-							<h4 class="article-author">arthur article</h4>
-							<p class="article-summary">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex eos voluptatum ducimus modi culpa, nesciunt atque ullam adipisci nam! Ullam consequatur odit nam voluptas veniam qui culpa omnis ipsa illo.</p>
-						</div>
-					</div>
-
-					<div class="layout-grid-4 article">
-						<img src="images/placeholder/fractal9.jpg" class="article-image">
-						<div class="article-text">
-							<h4 class="article-topic">economy</h4>
-							<h1 class="article-title">Heat Pumps Sell Like Hotcakes on America's Oil-Rich Frontier</h1>
-							<h4 class="article-author">william write</h4>
-							<p class="article-summary">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex eos voluptatum ducimus modi culpa, nesciunt atque ullam adipisci nam! Ullam consequatur odit nam voluptas veniam qui culpa omnis ipsa illo.</p>
-						</div>
-					</div>
-
-					<div class="layout-grid-4 article">
-						<img src="images/placeholder/fractal8.jpg" class="article-image">
-						<div class="article-text">
-							<h4 class="article-topic">tech review</h4>
-							<h1 class="article-title">The Best Apple 3-in-1 Wireless Chargers</h1>
-							<h4 class="article-author">peter o'hanrahahanrahan</h4>
-							<p class="article-summary">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex eos voluptatum ducimus modi culpa, nesciunt atque ullam adipisci nam! Ullam consequatur odit nam voluptas veniam qui culpa omnis ipsa illo.</p>
-						</div>
-					</div>
-				</div> -->
 			</section>
 		</div>
 	</body>
